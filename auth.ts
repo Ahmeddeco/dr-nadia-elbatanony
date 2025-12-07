@@ -4,7 +4,15 @@ import prisma from "./lib/prisma"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  debug: true,
+  debug: true, // TODO Delete this line in production
   adapter: PrismaAdapter(prisma),
-  providers: [Google],
+  providers: [Google({
+    authorization: {
+      params: {
+        prompt: "consent",
+        access_type: "offline",
+        response_type: "code",
+      },
+    },
+  }),],
 })

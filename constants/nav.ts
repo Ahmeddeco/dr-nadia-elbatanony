@@ -8,7 +8,7 @@ export const frontNavLinks = [
     href: "/courses"
   },
   {
-    title: "contact",
+    title: "contact us",
     href: "/contact"
   },
   {

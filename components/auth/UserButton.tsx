@@ -31,7 +31,7 @@ export default async function UserButton() {
 							</div>
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem>{user.name}</DropdownMenuItem>
+						<DropdownMenuItem className="capitalize">{user.name}</DropdownMenuItem>
 						<DropdownMenuItem>{user.email}</DropdownMenuItem>
 						<DropdownMenuItem>
 							<SignOut />

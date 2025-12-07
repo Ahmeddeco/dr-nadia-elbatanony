@@ -1,16 +1,8 @@
-import {
-	Sheet,
-	SheetContent,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-	SheetFooter,
-} from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetFooter } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import Logo from "./Logo"
 import FrontNavigation from "./FrontNavigation"
 import { ThemeButton } from "../theme/ThemeButton"
-import Search from "./Search"
 import UserButton from "@/components/auth/UserButton"
 
 export default function MobileMenu() {
@@ -31,7 +23,6 @@ export default function MobileMenu() {
 					</nav>
 					<SheetFooter className="flex-row items-center justify-between border-t shadow-md">
 						<UserButton />
-						<Search />
 						<ThemeButton />
 					</SheetFooter>
 				</SheetContent>
