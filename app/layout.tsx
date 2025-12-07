@@ -6,10 +6,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider"
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
 import { extractRouterConfig } from "uploadthing/server"
 import { ourFileRouter } from "@/app/api/uploadthing/core"
-
 import localFont from "next/font/local"
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
 
 const cairo = localFont({
 	src: "../public/Cairo.ttf",
@@ -30,9 +27,7 @@ export default function RootLayout({
 			<body className={`${cairo.className}  antialiased`}>
 				<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-					<Header />
-					<main className="min-h-dvh pt-20 container mx-auto px-4">{children}</main>
-					<Footer />
+					{children}
 					<Toaster
 						theme="system"
 						richColors
