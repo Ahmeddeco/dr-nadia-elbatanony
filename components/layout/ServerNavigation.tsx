@@ -1,10 +1,9 @@
 "use client"
 
 import { serverNav } from "@/constants/serverNav"
-import { SidebarMenu, SidebarMenuButton } from "../ui/sidebar"
+import { SidebarMenu } from "../ui/sidebar"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import React from "react"
 import { Button } from "../ui/button"
 
 export default function ServerNavigation() {
