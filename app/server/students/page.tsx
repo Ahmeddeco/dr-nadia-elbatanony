@@ -1,5 +1,5 @@
 import { isAdmin } from "@/functions/isAdmin"
-import { Armchair, MoreVertical, PlusCircle, UserSquare2 } from "lucide-react"
+import { MoreVertical, PlusCircle, UserSquare2 } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -40,8 +40,6 @@ export default async function StudentsPage({
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
 	const students = await getAllStudentsForStudentsPage(pageSize, pageNumber)
-
-	console.log("students from StudentsPage", students)
 
 	return (
 		<ServerPageCard

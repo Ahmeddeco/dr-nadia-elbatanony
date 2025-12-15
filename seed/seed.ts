@@ -29,6 +29,17 @@ async function main() {
   })
 }
 
+/* --------------------------------- course --------------------------------- */
+await prisma.course.createMany({
+  data: Array.from({ length: 22 }).map(() => ({
+    title: faker.book.title(),
+    description: faker.book.author(),
+    code: faker.string.nanoid(4),
+    level: faker.helpers.enumValue(DegreeProgram),
+  })), skipDuplicates: true
+})
+
+
 main()
   .then(() => console.log("Seeding complete"))
   .catch(e => console.error(e))

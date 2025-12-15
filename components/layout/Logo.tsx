@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Armchair, Microscope } from "lucide-react"
+import { Microscope } from "lucide-react"
 
 export default function Logo() {
 	return (

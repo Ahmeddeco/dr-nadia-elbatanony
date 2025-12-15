@@ -5,9 +5,9 @@ export default function ServerLayout({ children }: { children: React.ReactNode }
 	return (
 		<SidebarProvider>
 			<ServerSidebar />
-			<div className="w-full p-4 ">
+			<div className="w-full p-6 ">
 				<SidebarTrigger />
-				<div className=" p-4">{children}</div>
+				<div className="min-h-[80vh]">{children}</div>
 			</div>
 		</SidebarProvider>
 	)

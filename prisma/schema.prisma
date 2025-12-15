@@ -138,15 +138,17 @@ model Student {
 model Course {
   id          String           @id @default(uuid())
   title       String
+  author      String           @default("Dr.Nadia Elbatanony")
   description String?
   code        String           @unique
-  content     String
   level       DegreeProgram
   materials   CourseMaterial[]
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
   students    Student[]
   grades      Grade[]
+
+  @@index([code, id])
 }
 
 model CourseMaterial {

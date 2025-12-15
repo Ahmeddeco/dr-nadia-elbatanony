@@ -12,7 +12,6 @@ export const StudentSchema = z.object({
   id: z.string(),
   name: z.string(),
   email: z.string(),
-  image: z.string(),
   mobile: z.string(),
   age: z.number().nullish(),
   country: z.string().nullish(),
@@ -22,6 +21,7 @@ export const StudentSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
   userId: z.string().nullish(),
+  image: z.string(),
 })
 
 export type Student = z.infer<typeof StudentSchema>

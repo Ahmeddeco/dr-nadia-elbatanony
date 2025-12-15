@@ -12,6 +12,10 @@ export const serverNav = [
     href: "/server/courses",
   },
   {
+    title: "materials",
+    href: "/server/materials",
+  },
+  {
     title: "researches",
     href: "/server/researches",
   },
