@@ -7,30 +7,29 @@ import { useActionState } from "react"
 import { Field, FieldError, FieldLabel } from "../ui/field"
 import { Input } from "../ui/input"
 import SubmitButton from "../shared/SubmitButton"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { DegreeProgram } from "@/generated/prisma/enums"
-import { addCourseAction } from "@/actions/courseAction"
 import { Textarea } from "../ui/textarea"
-import CourseSchema from "@/schemas/CourseSchema"
+import CourseMaterialSchema from "@/schemas/materialSchema"
 import MultiSelect from "../shared/MultiSelect"
+import { addMaterialAction } from "@/actions/materialAction"
 
 type Props = {
-	allMaterials: {
+	allCourses: {
 		id: string
 		title: string
 	}[]
 }
 
-export default function AddCourse({ allMaterials }: Props) {
-	const [lastResult, action] = useActionState(addCourseAction, undefined)
+export default function AddMaterial({ allCourses }: Props) {
+	const [lastResult, action] = useActionState(addMaterialAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {
-			return parseWithZod(formData, { schema: CourseSchema })
+			return parseWithZod(formData, { schema: CourseMaterialSchema })
 		},
 		shouldValidate: "onBlur",
 		shouldRevalidate: "onInput",
 	})
+
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
 			{/* ---------------------------------- title --------------------------------- */}
@@ -70,40 +69,22 @@ export default function AddCourse({ allMaterials }: Props) {
 				<FieldError>{fields.description.errors}</FieldError>
 			</Field>
 
-			{/* ---------------------------------- code ---------------------------------- */}
+			{/* ---------------------------------- url ---------------------------------- */}
 			<Field>
-				<FieldLabel htmlFor={fields.code.name}>{fields.code.name}</FieldLabel>
+				<FieldLabel htmlFor={fields.url.name}>{fields.url.name}</FieldLabel>
 				<Input
-					type="text"
-					key={fields.code.key}
-					name={fields.code.name}
-					defaultValue={fields.code.initialValue}
+					type="url"
+					key={fields.url.key}
+					name={fields.url.name}
+					defaultValue={fields.url.initialValue}
 					placeholder="mb-001"
 				/>
-				<FieldError>{fields.code.errors}</FieldError>
+				<FieldError>{fields.url.errors}</FieldError>
 			</Field>
 
-			{/* --------------------------------- level -------------------------------- */}
-			<Field>
-				<FieldLabel htmlFor={fields.level.name}>level</FieldLabel>
-				<Select key={fields.level.key} name={fields.level.name} defaultValue={fields.level.initialValue}>
-					<SelectTrigger>
-						<SelectValue placeholder={DegreeProgram.master} />
-					</SelectTrigger>
-					<SelectContent>
-						{Object.values(DegreeProgram).map((degreeProgram) => (
-							<SelectItem value={degreeProgram} key={degreeProgram}>
-								{degreeProgram}
-							</SelectItem>
-						))}
-					</SelectContent>
-				</Select>
-				<FieldError>{fields.level.errors}</FieldError>
-			</Field>
+			<MultiSelect allSelectedData={allCourses} inputName={"courses"} label={"courses"} />
 
-			<MultiSelect allSelectedData={allMaterials} inputName={"materials"} label={"materials"} />
-
-			<SubmitButton text={"add course"} />
+			<SubmitButton text={"add material"} />
 		</Form>
 	)
 }

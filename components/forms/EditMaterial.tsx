@@ -7,31 +7,30 @@ import { useActionState } from "react"
 import { Field, FieldError, FieldLabel } from "../ui/field"
 import { Input } from "../ui/input"
 import SubmitButton from "../shared/SubmitButton"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { DegreeProgram } from "@/generated/prisma/enums"
-import { editCourseAction } from "@/actions/courseAction"
 import { Textarea } from "../ui/textarea"
-import CourseSchema from "@/schemas/CourseSchema"
-import { getOneCourseType } from "@/types/courseTypes"
+import MaterialSchema from "@/schemas/materialSchema"
+import { editMaterialAction } from "@/actions/materialAction"
 import MultiSelect from "../shared/MultiSelect"
+import { getOneMaterialType } from "@/types/materialTypes"
 
-export default function EditCourse({
+export default function EditMaterial({
 	defaultValues,
-	allMaterials,
+	allCourses,
 }: {
-	defaultValues: getOneCourseType
-	allMaterials:
+	defaultValues: getOneMaterialType
+	allCourses:
 		| {
 				id: string
 				title: string
+				code: string
 		  }[]
 		| undefined
 }) {
-	const [lastResult, action] = useActionState(editCourseAction, undefined)
+	const [lastResult, action] = useActionState(editMaterialAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
 		onValidate({ formData }) {
-			return parseWithZod(formData, { schema: CourseSchema })
+			return parseWithZod(formData, { schema: MaterialSchema })
 		},
 		shouldValidate: "onBlur",
 		shouldRevalidate: "onInput",
@@ -39,7 +38,8 @@ export default function EditCourse({
 
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
-			<Input type="hidden" value={defaultValues?.id ?? ""} name="id" />
+			<Input type="hidden" value={defaultValues?.id} name="id" />
+
 			{/* ---------------------------------- title --------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.title.name}>{fields.title.name}</FieldLabel>
@@ -52,6 +52,7 @@ export default function EditCourse({
 				/>
 				<FieldError>{fields.title.errors}</FieldError>
 			</Field>
+
 			{/* --------------------------------- author --------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.author.name}>{fields.author.name}</FieldLabel>
@@ -60,10 +61,11 @@ export default function EditCourse({
 					key={fields.author.key}
 					name={fields.author.name}
 					defaultValue={defaultValues?.author}
-					placeholder="Micro Biology"
+					placeholder="Dr.Nadia Elbatanony"
 				/>
 				<FieldError>{fields.author.errors}</FieldError>
 			</Field>
+
 			{/* ---------------------------------- description --------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.description.name}>{fields.description.name}</FieldLabel>
@@ -74,44 +76,28 @@ export default function EditCourse({
 				/>
 				<FieldError>{fields.description.errors}</FieldError>
 			</Field>
-			{/* ---------------------------------- code ---------------------------------- */}
+
+			{/* ---------------------------------- url ---------------------------------- */}
 			<Field>
-				<FieldLabel htmlFor={fields.code.name}>{fields.code.name}</FieldLabel>
+				<FieldLabel htmlFor={fields.url.name}>{fields.url.name}</FieldLabel>
 				<Input
-					type="text"
-					key={fields.code.key}
-					name={fields.code.name}
-					defaultValue={defaultValues?.code}
+					type="url"
+					key={fields.url.key}
+					name={fields.url.name}
+					defaultValue={defaultValues?.url}
 					placeholder="mb-001"
 				/>
-				<FieldError>{fields.code.errors}</FieldError>
-			</Field>
-			{/* --------------------------------- level -------------------------------- */}
-			<Field>
-				<FieldLabel htmlFor={fields.level.name}>level</FieldLabel>
-				<Select key={fields.level.key} name={fields.level.name} defaultValue={defaultValues?.level}>
-					<SelectTrigger>
-						<SelectValue placeholder={DegreeProgram.master} />
-					</SelectTrigger>
-					<SelectContent>
-						{Object.values(DegreeProgram).map((degreeProgram) => (
-							<SelectItem value={degreeProgram} key={degreeProgram}>
-								{degreeProgram}
-							</SelectItem>
-						))}
-					</SelectContent>
-				</Select>
-				<FieldError>{fields.level.errors}</FieldError>
+				<FieldError>{fields.url.errors}</FieldError>
 			</Field>
 
 			<MultiSelect
-				allSelectedData={allMaterials}
-				inputName={"materials"}
-				label={"materials"}
-				defaultValues={defaultValues?.materials}
+				allSelectedData={allCourses}
+				inputName={"courses"}
+				label={"courses"}
+				defaultValues={defaultValues?.course}
 			/>
 
-			<SubmitButton text={"edit course"} />
+			<SubmitButton text={"edit material"} />
 		</Form>
 	)
 }

@@ -29,6 +29,7 @@ import { Input } from "@/components/ui/input"
 import { deleteStudentAction } from "@/actions/studentAction"
 import { getAllCoursesForCoursesPage } from "@/dl/courseData"
 import { deleteCourseAction } from "@/actions/courseAction"
+import { Badge } from "@/components/ui/badge"
 
 export default async function CoursesPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
 	await isAdmin()
@@ -55,25 +56,25 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 						<TableRow>
 							<TableHead>code</TableHead>
 							<TableHead>title</TableHead>
-							<TableHead>description</TableHead>
 							<TableHead>author</TableHead>
 							<TableHead>level</TableHead>
-							<TableHead>created At</TableHead>
-							<TableHead>updated At</TableHead>
+							<TableHead>materials</TableHead>
 							<TableHead className="text-right">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{courses?.data.map(({ code, description, createdAt, id, level, title, author, updatedAt }) => (
+						{courses?.data.map(({ code, id, level, title, author, materials }) => (
 							<TableRow key={id}>
 								<TableCell className="capitalize">{code} </TableCell>
 								<TableCell className="capitalize">{title}</TableCell>
-								<TableCell className="capitalize">{description} </TableCell>
 								<TableCell className="capitalize">{author} </TableCell>
 								<TableCell className="capitalize">{level} </TableCell>
-								<TableCell className="capitalize">{createdAt.toLocaleDateString()}</TableCell>
-								<TableCell className="capitalize">{updatedAt.toLocaleDateString()}</TableCell>
+								<TableCell className="flex flex-wrap gap-2 ">
+									{materials.map((material) => (
+										<Badge key={material.id}>{material.title}</Badge>
+									))}
+								</TableCell>
 
 								{/* -------------------------------- settings -------------------------------- */}
 								<TableCell className="text-right">

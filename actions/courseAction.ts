@@ -6,12 +6,20 @@ import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
 
 export const addCourseAction = async (prevState: unknown, formData: FormData) => {
+
+  console.log("formData from addCourseAction", formData)
+
+
   const submission = parseWithZod(formData, {
     schema: CourseSchema,
   })
   if (submission.status !== 'success') {
     return submission.reply()
   }
+
+  const materials = formData.get("materials")
+  const splittedMaterials = JSON.parse(materials as string)
+
   try {
     await prisma.course.upsert({
       where: { code: submission.value.code },
@@ -21,13 +29,24 @@ export const addCourseAction = async (prevState: unknown, formData: FormData) =>
         description: submission.value.description ?? "",
         code: submission.value.code,
         level: submission.value.level,
+        materials: {
+          connect: splittedMaterials.map((material: { id: string; title: string }) => ({
+            id: material.id as string,
+            title: material.title as string,
+          }))
+        }
       },
       update: {
         title: submission.value.title,
         author: submission.value.author,
         description: submission.value.description ?? "",
         level: submission.value.level,
-
+        materials: {
+          set: splittedMaterials.map((material: { id: string; title: string }) => ({
+            id: material.id as string,
+            title: material.title as string,
+          }))
+        }
       }
     })
   } catch (error) {
@@ -44,6 +63,10 @@ export const editCourseAction = async (prevState: unknown, formData: FormData) =
   if (submission.status !== 'success') {
     return submission.reply()
   }
+
+  const materials = formData.get("materials")
+  const splittedMaterials = JSON.parse(materials as string)
+
   try {
     await prisma.course.update({
       where: { id: submission.value.id! },
@@ -53,6 +76,11 @@ export const editCourseAction = async (prevState: unknown, formData: FormData) =
         description: submission.value.description ?? "",
         code: submission.value.code,
         level: submission.value.level,
+        materials: {
+          set: splittedMaterials?.map((id: string) => ({
+            id: id
+          }))
+        }
       },
     })
   } catch (error) {

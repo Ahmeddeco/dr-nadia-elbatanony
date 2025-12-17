@@ -136,30 +136,30 @@ model Student {
 }
 
 model Course {
-  id          String           @id @default(uuid())
+  id          String        @id @default(uuid())
   title       String
-  author      String           @default("Dr.Nadia Elbatanony")
+  author      String        @default("Dr.Nadia Elbatanony")
   description String?
-  code        String           @unique
+  code        String        @unique
   level       DegreeProgram
-  materials   CourseMaterial[]
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  materials   Material[]
   students    Student[]
   grades      Grade[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
   @@index([code, id])
 }
 
-model CourseMaterial {
-  id        String   @id @default(uuid())
-  type      String // e.g., "Lecture PDF", "Lab Manual", "External Link"
-  title     String
-  url       String // URL to the hosted file or resource
-  course    Course?  @relation(fields: [courseId], references: [id])
-  courseId  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Material {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  author      String   @default("Dr.Nadia Elbatanony")
+  description String?
+  url         String
+  course      Course[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Grade {

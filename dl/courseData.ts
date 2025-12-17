@@ -9,6 +9,7 @@ export const getAllCoursesForCoursesPage = async (size: number, page: number) =>
 
     const data = await prisma.course.findMany({
       orderBy: { title: "asc" },
+      select: { id: true, title: true, code: true, level: true, author: true, materials: { select: { id: true, title: true } }, },
       take: size,
       skip: (page * size) - size,
     })
@@ -23,7 +24,24 @@ export const getOneCourse = async (id: string) => {
   try {
 
     const data = await prisma.course.findUnique({
-      where: { id }
+      where: { id }, include: { materials: true }
+    })
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+/* ---------------------- getAllCoursesForMaterialPage ---------------------- */
+export const getAllCoursesForMaterialPage = async () => {
+  try {
+    const data = await prisma.course.findMany({
+      select: {
+        id: true,
+        title: true,
+        code: true,
+      },
+      orderBy: { title: "asc" },
     })
     return data
   } catch (error) {
