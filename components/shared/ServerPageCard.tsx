@@ -23,7 +23,7 @@ export default function ServerPageCard({
 	href,
 }: Props) {
 	return (
-		<Card className="h-auto ">
+		<Card className="h-auto lg:h-[90vh] min-h-[90vh] ">
 			<CardHeader>
 				<CardTitle>{title}</CardTitle>
 				<CardDescription>{description}</CardDescription>
@@ -37,7 +37,7 @@ export default function ServerPageCard({
 				</CardAction>
 			</CardHeader>
 			<Separator />
-			<CardContent>{children}</CardContent>
+			<CardContent className="h-full ">{children}</CardContent>
 		</Card>
 	)
 }

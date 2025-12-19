@@ -190,28 +190,28 @@
 		letter-spacing: var(--tracking-normal);
 	}
 	h1 {
-		@apply text-3xl lg:text-4xl font-black capitalize;
+		@apply text-3xl lg:text-4xl font-black capitalize text-center lg:text-start;
 	}
 	h2 {
-		@apply text-2xl lg:text-3xl font-bold capitalize;
+		@apply text-2xl lg:text-3xl font-bold capitalize text-center lg:text-start;
 	}
 	h3 {
-		@apply text-xl lg:text-2xl font-semibold capitalize;
+		@apply text-xl lg:text-2xl font-semibold capitalize text-center lg:text-start;
 	}
 	h4 {
-		@apply text-lg lg:text-xl font-medium capitalize;
+		@apply text-lg lg:text-xl font-medium capitalize text-center lg:text-start;
 	}
 	h5 {
-		@apply text-base lg:text-lg font-normal capitalize;
+		@apply text-base lg:text-lg font-normal capitalize text-center lg:text-start;
 	}
 	h6 {
-		@apply text-sm lg:text-base font-light capitalize;
+		@apply text-sm lg:text-base font-light text-pretty  text-center lg:text-start;
 	}
 	p {
-		@apply text-xs lg:text-sm font-extralight text-muted-foreground;
+		@apply text-xs lg:text-sm font-extralight text-muted-foreground text-center lg:text-start;
 	}
-	.section {
-		@apply flex flex-col items-center justify-center lg:gap-12 gap-4 relative py-8 lg:py-24 text-center lg:text-start;
+	section {
+		@apply py-8;
 	}
 	.PhoneInput {
 		@apply file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm;

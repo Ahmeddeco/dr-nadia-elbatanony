@@ -1,3 +1,6 @@
+import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6"
+
+
 export const frontNavLinks = [
   {
     title: "home",
@@ -8,11 +11,30 @@ export const frontNavLinks = [
     href: "/courses"
   },
   {
+    title: "researches",
+    href: "/researches"
+  },
+  {
     title: "contact us",
-    href: "/contact"
+    href: "/contact-us"
   },
   {
     title: "server",
-    href: "/server",
+    href: "/server/dashboard",
+  },
+]
+
+export const socials = [
+  {
+    href: "https://www.facebook.com//",
+    icon: FaFacebookF
+  },
+  {
+    href: "https://www.instagram.com//#",
+    icon: FaInstagram
+  },
+  {
+    href: "https://x.com/",
+    icon: FaXTwitter
   },
 ]
