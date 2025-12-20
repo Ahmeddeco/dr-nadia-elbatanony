@@ -1,18 +1,9 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getAllCoursesForCoursesPage } from "@/dl/courseData"
-import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-	DialogFooter,
-	DialogClose,
-} from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import ServerPageCard from "@/components/shared/ServerPageCard"
-import { CircleX, Home, LogIn } from "lucide-react"
+import { Home } from "lucide-react"
 import EmptyCard from "@/components/shared/EmptyCard"
 import {
 	Pagination,
@@ -22,7 +13,6 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination"
-import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
 
 export default async function CoursesPage({ searchParams }: { searchParams: Promise<{ page: string; size: string }> }) {
@@ -61,10 +51,7 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 								<DialogHeader>
 									<DialogTitle>{title}</DialogTitle>
 									<div className="flex flex-col gap-2 capitalize">
-										<h6>author: {author}</h6>
-										<h6>code: {code}</h6>
-										<h6>level: {level}</h6>
-										<h6>materials:</h6>
+										<h6>author:</h6>
 										<div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
 											{materials.map(({ id, title }) => (
 												<Badge key={id} variant={"secondary"}>
@@ -72,6 +59,16 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 												</Badge>
 											))}
 										</div>
+										<h6>materials:</h6>
+										<div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+											{author.map(({ id, name }) => (
+												<Badge key={id} variant={"secondary"}>
+													{name}
+												</Badge>
+											))}
+										</div>
+										<h6>code: {code}</h6>
+										<h6>level: {level}</h6>
 										<Separator />
 										<h6>description:</h6>
 										<p className="lowercase">{description}</p>
