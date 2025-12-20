@@ -15,10 +15,6 @@ export const frontNavLinks = [
     href: "/researches"
   },
   {
-    title: "contact us",
-    href: "/contact-us"
-  },
-  {
     title: "server",
     href: "/server/dashboard",
   },

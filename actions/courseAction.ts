@@ -20,32 +20,36 @@ export const addCourseAction = async (prevState: unknown, formData: FormData) =>
   const materials = formData.get("materials")
   const splittedMaterials = JSON.parse(materials as string)
 
+  const authors = formData.get("authors")
+  const splittedAuthors = JSON.parse(authors as string)
+
   try {
     await prisma.course.upsert({
       where: { code: submission.value.code },
       create: {
         title: submission.value.title,
-        author: submission.value.author,
         description: submission.value.description ?? "",
         code: submission.value.code,
         level: submission.value.level,
+        author: {
+          connect:
+            splittedAuthors.map((id: string) => ({ id }))
+        },
         materials: {
-          connect: splittedMaterials.map((material: { id: string; title: string }) => ({
-            id: material.id as string,
-            title: material.title as string,
-          }))
+          connect: splittedMaterials.map((id: string) => ({ id }))
         }
       },
       update: {
         title: submission.value.title,
-        author: submission.value.author,
         description: submission.value.description ?? "",
+        code: submission.value.code,
         level: submission.value.level,
+        author: {
+          connect:
+            splittedAuthors.map((id: string) => ({ id }))
+        },
         materials: {
-          set: splittedMaterials.map((material: { id: string; title: string }) => ({
-            id: material.id as string,
-            title: material.title as string,
-          }))
+          set: splittedMaterials.map((id: string) => ({ id }))
         }
       }
     })
@@ -67,19 +71,23 @@ export const editCourseAction = async (prevState: unknown, formData: FormData) =
   const materials = formData.get("materials")
   const splittedMaterials = JSON.parse(materials as string)
 
+  const authors = formData.get("authors")
+  const splittedAuthors = JSON.parse(authors as string)
+
   try {
     await prisma.course.update({
       where: { id: submission.value.id! },
       data: {
         title: submission.value.title,
-        author: submission.value.author,
         description: submission.value.description ?? "",
         code: submission.value.code,
         level: submission.value.level,
+        author: {
+          set:
+            splittedAuthors.map((id: string) => ({ id }))
+        },
         materials: {
-          set: splittedMaterials?.map((id: string) => ({
-            id: id
-          }))
+          set: splittedMaterials.map((id: string) => ({ id }))
         }
       },
     })

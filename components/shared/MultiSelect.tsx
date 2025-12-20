@@ -8,7 +8,6 @@ import { useState } from "react"
 import { Field, FieldLabel } from "../ui/field"
 import { Card, CardContent, CardHeader } from "../ui/card"
 import { Input } from "../ui/input"
-import { Badge } from "../ui/badge"
 
 type Props = {
 	allSelectedData:
@@ -26,6 +25,7 @@ type Props = {
 	inputName: string
 	label: string
 }
+// TODO add image to the selection and make it optional
 
 export default function MultiSelect({ allSelectedData, inputName, label, defaultValues }: Props) {
 	const [selected, setSelected] = useState<{ id: string; title: string }[]>(defaultValues || [])
@@ -49,13 +49,14 @@ export default function MultiSelect({ allSelectedData, inputName, label, default
 				{/* -------------------------------- Badge ------------------------------- */}
 				<CardHeader className="flex flex-wrap gap-6">
 					{selected.map(({ id, title }) => (
-						<Badge
+						<Button
 							key={id}
 							onClick={() => setSelected(selected.filter((item) => item.id !== id))}
 							className="cursor-pointer"
+							size={"sm"}
 						>
 							{title}
-						</Badge>
+						</Button>
 					))}
 				</CardHeader>
 
@@ -63,13 +64,13 @@ export default function MultiSelect({ allSelectedData, inputName, label, default
 				<CardContent className="flex flex-col gap-3 w-full">
 					<Popover>
 						<PopoverTrigger asChild>
-							<Button variant="outline" role="combobox" size={"lg"} type="button">
+							<Button variant="outline" role="combobox" size={"lg"} type="button" className="justify-start w-fit">
 								select {inputName}
 								<ChevronDown opacity={0.5} />
 							</Button>
 						</PopoverTrigger>
 
-						<PopoverContent className="w-[200px] p-0 ">
+						<PopoverContent className="w-[200px] p-0 " align="start">
 							<Command>
 								<CommandEmpty>No result found.</CommandEmpty>
 								<CommandGroup>

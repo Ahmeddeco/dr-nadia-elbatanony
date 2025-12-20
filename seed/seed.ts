@@ -6,7 +6,24 @@ import { faker } from '@faker-js/faker'
 async function main() {
   console.log('--- Starting Seeding Process ---')
 
-  /* ---------------------------- 1. Create Students --------------------------- */
+  /* ----------------------------- professorData ---------------------------- */
+  const professorData = await prisma.professor.createMany({
+    data: Array.from({ length: 12 }).map(() => ({
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+      mobile: faker.phone.number({ style: "international" }),
+      country: faker.location.country(),
+      state: faker.location.state(),
+      city: faker.location.city(),
+      gender: faker.helpers.enumValue(Gender),
+      age: faker.number.int({ min: 30, max: 100 }),
+      image: faker.image.personPortrait(),
+    })),
+    skipDuplicates: true
+  })
+  console.log(`✅ ${professorData.count} Professors created.`)
+
+  /* ------------------------------- studentData ------------------------------ */
   const studentData = await prisma.student.createMany({
     data: Array.from({ length: 22 }).map(() => ({
       name: faker.person.fullName(),
@@ -25,9 +42,7 @@ async function main() {
   })
   console.log(`✅ ${studentData.count} Students created.`)
 
-
-  /* -------------------------- 2. Create Courses (Parent) -------------------------- */
-
+  /* ------------------------------- courseData ------------------------------- */
   const courseData = Array.from({ length: 8 }).map(() => ({
     title: faker.book.title(),
     description: faker.book.author(),
@@ -44,14 +59,11 @@ async function main() {
   const courseIds = createdCourses.map(c => c.id)
   console.log(`✅ ${courseIds.length} Courses created.`)
 
-
-  /* ------------------------------- Material ------------------------------- */
-
+  /* ----------------------------- materialData ----------------------------- */
   if (courseIds.length === 0) {
     console.warn('⚠️ No courses created. Skipping material creation to avoid P2003 error.')
     return
   }
-
   const materialData = Array.from({ length: 8 }).map((_, index) => ({
     title: faker.book.title(),
     author: faker.person.fullName(),

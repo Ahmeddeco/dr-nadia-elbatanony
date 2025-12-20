@@ -24,7 +24,7 @@ export const getOneCourse = async (id: string) => {
   try {
 
     const data = await prisma.course.findUnique({
-      where: { id }, include: { materials: true }
+      where: { id }, include: { materials: { select: { id: true, title: true } }, author: { select: { id: true, name: true } } }
     })
     return data
   } catch (error) {

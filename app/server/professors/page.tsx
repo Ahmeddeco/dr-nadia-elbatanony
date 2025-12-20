@@ -1,5 +1,5 @@
 import { isAdmin } from "@/functions/isAdmin"
-import { MoreVertical, PlusCircle, SquareArrowOutUpLeft, UserSquare2 } from "lucide-react"
+import { MoreVertical, PlusCircle, UserSquare2 } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -12,6 +12,7 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import {
@@ -25,11 +26,10 @@ import {
 } from "@/components/ui/dialog"
 import Form from "next/form"
 import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { getAllResearchesForResearchesPage } from "@/dl/researchData"
-import { deleteResearchAction } from "@/actions/researchAction"
+import { getAllProfessorsForProfessorsPage } from "@/dl/professorData"
+import { deleteProfessorAction } from "@/actions/professorAction"
 
-export default async function ResearchPage({
+export default async function ProfessorPage({
 	searchParams,
 }: {
 	searchParams: Promise<{ page: string; size: string }>
@@ -39,53 +39,54 @@ export default async function ResearchPage({
 	const { page, size } = await searchParams
 	const pageNumber = +page > 1 ? +page : 1
 	const pageSize = +size || 10
-	const researches = await getAllResearchesForResearchesPage(pageSize, pageNumber)
+	const professors = await getAllProfessorsForProfessorsPage(pageSize, pageNumber)
 
 	return (
 		<ServerPageCard
 			icon={PlusCircle}
-			title={"all researches"}
-			description={"All researches in the database."}
-			btnTitle={"add research"}
-			href={"/server/researches/add"}
+			title={"all professors"}
+			description={"All professors in the database."}
+			btnTitle={"add professor"}
+			href={"/server/professors/add"}
 		>
-			{researches?.data.length == 0 ? (
-				<EmptyCard href={"/server/researches/add"} linkTitle={"add research"} linkIcon={UserSquare2} />
+			{professors?.data.length == 0 ? (
+				<EmptyCard href={"/server/professors/add"} linkTitle={"add professor"} linkIcon={UserSquare2} />
 			) : (
 				<Table>
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>author</TableHead>
-							<TableHead>title</TableHead>
-							<TableHead>journal</TableHead>
-							<TableHead>publication Date</TableHead>
-							<TableHead>go to</TableHead>
+							<TableHead>image</TableHead>
+							<TableHead>name</TableHead>
+							<TableHead>age</TableHead>
+							<TableHead>email</TableHead>
+							<TableHead>mobile</TableHead>
+							<TableHead>gender</TableHead>
+							<TableHead>address</TableHead>
 							<TableHead className="text-right">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
-						{researches?.data.map(({ authors, id, journal, link, publicationDate, title }) => (
+						{professors?.data.map(({ age, city, country, email, gender, id, image, mobile, name, state }) => (
 							<TableRow key={id}>
-								<TableCell className="flex flex-wrap gap-2 ">
-									{authors.map((author) => (
-										<Badge key={author.id}>{author.name}</Badge>
-									))}
+								<TableCell>
+									<Image
+										src={image ?? "/noImage.svg"}
+										alt={name ?? "noImage"}
+										width={50}
+										height={50}
+										className="rounded-lg object-cover aspect-square"
+									/>
 								</TableCell>
-								<TableCell className="capitalize">{title} </TableCell>
-								<TableCell className="capitalize">{journal}</TableCell>
+								<TableCell className="capitalize">{name}</TableCell>
+								<TableCell className="capitalize">{age} years</TableCell>
+								<TableCell className="capitalize">{email}</TableCell>
+								<TableCell>{mobile}</TableCell>
+								<TableCell className="capitalize">{gender}</TableCell>
 								<TableCell className="capitalize">
-									{publicationDate.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
+									{country} - {state} - {city}
 								</TableCell>
-								<TableCell className="capitalize">
-									<Button variant={"link"} size={"icon"} asChild>
-										<Link href={link}>
-											<SquareArrowOutUpLeft />
-										</Link>
-									</Button>
-								</TableCell>
-
 								{/* -------------------------------- settings -------------------------------- */}
 								<TableCell className="text-right">
 									<DropdownMenu>
@@ -95,7 +96,7 @@ export default async function ResearchPage({
 										<DropdownMenuContent align="end" className="space-y-2">
 											<DropdownMenuItem asChild>
 												<Button variant={"default"} size={"full"} asChild>
-													<Link href={`/server/researches/edit/${id}`}>edit</Link>
+													<Link href={`/server/professors/edit/${id}`}>edit</Link>
 												</Button>
 											</DropdownMenuItem>
 											{/* ---------------------------- delete --------------------------- */}
@@ -108,9 +109,9 @@ export default async function ResearchPage({
 													</DialogTrigger>
 													<DialogContent>
 														<DialogHeader>
-															<DialogTitle>Are you sure you want to delete this research ?</DialogTitle>
+															<DialogTitle>Are you sure you want to delete this product ?</DialogTitle>
 															<DialogDescription>
-																This action can not be undone. This will permanently delete this research and remove its
+																This action can not be undone. This will permanently delete this product and remove its
 																data from our servers.
 															</DialogDescription>
 														</DialogHeader>
@@ -118,7 +119,7 @@ export default async function ResearchPage({
 															<Button asChild>
 																<DialogClose>cancel</DialogClose>
 															</Button>
-															<Form action={deleteResearchAction}>
+															<Form action={deleteProfessorAction}>
 																<Input type="hidden" name="id" value={id} />
 																<Button variant={"destructive"} type="submit">
 																	delete
@@ -143,7 +144,7 @@ export default async function ResearchPage({
 									{pageNumber > 1 && <PaginationPrevious href={`?size=${pageSize}&page=${pageNumber - 1}`} />}
 								</PaginationItem>
 								{/* ------------------------- PaginationLink ------------------------ */}
-								{Array.from({ length: researches!.totalPages ?? 1 }).map((_, index) => (
+								{Array.from({ length: professors!.totalPages ?? 1 }).map((_, index) => (
 									<PaginationItem key={index}>
 										<PaginationLink href={`?size=${pageSize}&page=${index + 1}`} isActive={pageNumber === index + 1}>
 											{index + 1}
@@ -152,7 +153,7 @@ export default async function ResearchPage({
 								))}
 								<PaginationItem>
 									{/* ----------------------------- Next ----------------------------- */}
-									{pageNumber < researches!.totalPages && (
+									{pageNumber < professors!.totalPages && (
 										<PaginationNext href={`?size=${pageSize}&page=${pageNumber + 1}`} />
 									)}
 								</PaginationItem>

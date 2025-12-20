@@ -5,7 +5,6 @@ export const CourseSchema = z.object({
   level: DegreeProgramSchema,
   id: z.string().nullish(),
   title: z.string(),
-  author: z.string(),
   description: z.string().nullish(),
   code: z.string(),
 })

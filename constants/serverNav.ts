@@ -1,10 +1,15 @@
-import { BookType, ChartNoAxesCombined, LibraryBig, SearchCheck, Users } from "lucide-react"
+import { BookType, ChartNoAxesCombined, GraduationCap, LibraryBig, SearchCheck, Users } from "lucide-react"
 
 export const serverNav = [
   {
     title: "dashboard",
     href: "/server/dashboard",
     icon: ChartNoAxesCombined
+  },
+  {
+    title: "professors",
+    href: "/server/professors",
+    icon: GraduationCap
   },
   {
     title: "students",

@@ -52,30 +52,36 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 					{/* ---------------------------- TableHeader ---------------------------- */}
 					<TableHeader>
 						<TableRow>
-							<TableHead>code</TableHead>
-							<TableHead>title</TableHead>
-							<TableHead>author</TableHead>
-							<TableHead>level</TableHead>
-							<TableHead>materials</TableHead>
-							<TableHead className="text-right">settings</TableHead>
+							<TableHead className=" col-span-1">code</TableHead>
+							<TableHead className=" col-span-3">title</TableHead>
+							<TableHead className=" col-span-1">level</TableHead>
+							<TableHead className=" col-span-3">materials</TableHead>
+							<TableHead className=" col-span-3">author</TableHead>
+							<TableHead className="text-right col-span-1">settings</TableHead>
 						</TableRow>
 					</TableHeader>
 					{/* ----------------------------- TableBody ----------------------------- */}
 					<TableBody>
 						{courses?.data.map(({ code, id, level, title, author, materials }) => (
 							<TableRow key={id}>
-								<TableCell className="capitalize">{code} </TableCell>
-								<TableCell className="capitalize">{title}</TableCell>
-								<TableCell className="capitalize">{author} </TableCell>
-								<TableCell className="capitalize">{level} </TableCell>
-								<TableCell className="flex flex-wrap gap-2 ">
+								<TableCell className="capitalize col-span-1">{code} </TableCell>
+								<TableCell className="capitalize col-span-3">{title}</TableCell>
+								<TableCell className="capitalize col-span-1">{level} </TableCell>
+
+								<TableCell className="flex flex-wrap gap-2 col-span-3">
 									{materials.map((material) => (
 										<Badge key={material.id}>{material.title}</Badge>
 									))}
 								</TableCell>
 
+								<TableCell className="flex flex-wrap gap-2 col-span-3">
+									{author.map((prof) => (
+										<Badge key={prof.id}>{prof.name}</Badge>
+									))}
+								</TableCell>
+
 								{/* -------------------------------- settings -------------------------------- */}
-								<TableCell className="text-right">
+								<TableCell className="text-right col-span-1">
 									<DropdownMenu>
 										<DropdownMenuTrigger>
 											<MoreVertical />

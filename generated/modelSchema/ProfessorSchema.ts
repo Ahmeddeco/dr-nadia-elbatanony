@@ -1,14 +1,12 @@
 import { z } from 'zod';
 import { GenderSchema } from '../inputTypeSchemas/GenderSchema'
-import { DegreeProgramSchema } from '../inputTypeSchemas/DegreeProgramSchema'
 
 /////////////////////////////////////////
-// STUDENT SCHEMA
+// PROFESSOR SCHEMA
 /////////////////////////////////////////
 
-export const StudentSchema = z.object({
+export const ProfessorSchema = z.object({
   gender: GenderSchema,
-  degreeProgram: DegreeProgramSchema,
   id: z.string(),
   name: z.string(),
   image: z.string(),
@@ -18,12 +16,11 @@ export const StudentSchema = z.object({
   country: z.string().nullish(),
   state: z.string().nullish(),
   city: z.string().nullish(),
-  studentIdNumber: z.string(),
+  userId: z.string().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  userId: z.string().nullish(),
 })
 
-export type Student = z.infer<typeof StudentSchema>
+export type Professor = z.infer<typeof ProfessorSchema>
 
-export default StudentSchema;
+export default ProfessorSchema;

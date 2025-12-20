@@ -19,9 +19,16 @@ type Props = {
 		id: string
 		title: string
 	}[]
+	allAuthors:
+		| {
+				id: string
+				name: string
+				image: string
+		  }[]
+		| undefined
 }
 
-export default function AddCourse({ allMaterials }: Props) {
+export default function AddCourse({ allMaterials, allAuthors }: Props) {
 	const [lastResult, action] = useActionState(addCourseAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
@@ -46,18 +53,12 @@ export default function AddCourse({ allMaterials }: Props) {
 				<FieldError>{fields.title.errors}</FieldError>
 			</Field>
 
-			{/* --------------------------------- author --------------------------------- */}
-			<Field>
-				<FieldLabel htmlFor={fields.author.name}>{fields.author.name}</FieldLabel>
-				<Input
-					type="text"
-					key={fields.author.key}
-					name={fields.author.name}
-					defaultValue="Dr.Nadia Elbatanony"
-					placeholder="Dr.Nadia Elbatanony"
-				/>
-				<FieldError>{fields.author.errors}</FieldError>
-			</Field>
+			{/* --------------------------------- authors --------------------------------- */}
+			<MultiSelect
+				allSelectedData={allAuthors?.map((prof) => ({ id: prof.id, title: prof.name, image: prof.image }))}
+				inputName={"authors"}
+				label={"authors"}
+			/>
 
 			{/* ---------------------------------- description --------------------------------- */}
 			<Field>
@@ -101,6 +102,7 @@ export default function AddCourse({ allMaterials }: Props) {
 				<FieldError>{fields.level.errors}</FieldError>
 			</Field>
 
+			{/* -------------------------------- materials ------------------------------- */}
 			<MultiSelect allSelectedData={allMaterials} inputName={"materials"} label={"materials"} />
 
 			<SubmitButton text={"add course"} />

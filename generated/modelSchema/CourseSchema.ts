@@ -9,7 +9,6 @@ export const CourseSchema = z.object({
   level: DegreeProgramSchema,
   id: z.string(),
   title: z.string(),
-  author: z.string(),
   description: z.string().nullish(),
   code: z.string(),
   createdAt: z.date(),

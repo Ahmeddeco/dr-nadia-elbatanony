@@ -11,22 +11,49 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { DegreeProgram } from "@/generated/prisma/enums"
 import { editCourseAction } from "@/actions/courseAction"
 import { Textarea } from "../ui/textarea"
-import CourseSchema from "@/schemas/CourseSchema"
+import CourseSchema, { Course } from "@/schemas/CourseSchema"
 import { getOneCourseType } from "@/types/courseTypes"
 import MultiSelect from "../shared/MultiSelect"
+import { Material } from "@/schemas/materialSchema"
 
-export default function EditCourse({
-	defaultValues,
-	allMaterials,
-}: {
-	defaultValues: getOneCourseType
+type Props = {
+	defaultValues:
+		| ({
+				author: {
+					id: string
+					name: string
+				}[]
+				materials: {
+					id: string
+					title: string
+				}[]
+		  } & {
+				level: DegreeProgram
+				id: string
+				title: string
+				description: string | null
+				code: string
+				createdAt: Date
+				updatedAt: Date
+		  })
+		| null
+		| undefined
 	allMaterials:
 		| {
 				id: string
 				title: string
 		  }[]
 		| undefined
-}) {
+	allAuthors:
+		| {
+				id: string
+				name: string
+				image: string
+		  }[]
+		| undefined
+}
+
+export default function EditCourse({ defaultValues, allAuthors, allMaterials }: Props) {
 	const [lastResult, action] = useActionState(editCourseAction, undefined)
 	const [form, fields] = useForm({
 		lastResult,
@@ -48,22 +75,18 @@ export default function EditCourse({
 					key={fields.title.key}
 					name={fields.title.name}
 					defaultValue={defaultValues?.title}
-					placeholder="Micro Biology"
+					placeholder="Ahmed Mohamed"
 				/>
 				<FieldError>{fields.title.errors}</FieldError>
 			</Field>
-			{/* --------------------------------- author --------------------------------- */}
-			<Field>
-				<FieldLabel htmlFor={fields.author.name}>{fields.author.name}</FieldLabel>
-				<Input
-					type="text"
-					key={fields.author.key}
-					name={fields.author.name}
-					defaultValue={defaultValues?.author}
-					placeholder="Micro Biology"
-				/>
-				<FieldError>{fields.author.errors}</FieldError>
-			</Field>
+
+			{/* --------------------------------- authors --------------------------------- */}
+			<MultiSelect
+				allSelectedData={allAuthors?.map((prof) => ({ id: prof.id, title: prof.name, image: prof.image }))}
+				inputName={"authors"}
+				label={"authors"}
+				defaultValues={defaultValues?.author.map((prof) => ({ id: prof.id, title: prof.name }))}
+			/>
 			{/* ---------------------------------- description --------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.description.name}>{fields.description.name}</FieldLabel>
