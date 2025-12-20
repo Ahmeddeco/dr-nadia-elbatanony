@@ -9,7 +9,7 @@ export const getAllCoursesForCoursesPage = async (size: number, page: number) =>
 
     const data = await prisma.course.findMany({
       orderBy: { title: "asc" },
-      select: { id: true, title: true, code: true, level: true, author: true, materials: { select: { id: true, title: true } }, },
+      select: { id: true, title: true, code: true, level: true, author: true, description: true, materials: { select: { id: true, title: true, url: true } }, },
       take: size,
       skip: (page * size) - size,
     })

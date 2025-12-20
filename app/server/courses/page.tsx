@@ -12,7 +12,6 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import {
@@ -26,7 +25,6 @@ import {
 } from "@/components/ui/dialog"
 import Form from "next/form"
 import { Input } from "@/components/ui/input"
-import { deleteStudentAction } from "@/actions/studentAction"
 import { getAllCoursesForCoursesPage } from "@/dl/courseData"
 import { deleteCourseAction } from "@/actions/courseAction"
 import { Badge } from "@/components/ui/badge"

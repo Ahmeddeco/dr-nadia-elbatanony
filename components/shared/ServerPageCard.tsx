@@ -12,6 +12,7 @@ type Props = {
 	description: string
 	btnTitle: string
 	href: string
+	className?: string
 }
 
 export default function ServerPageCard({
@@ -21,9 +22,10 @@ export default function ServerPageCard({
 	description,
 	btnTitle,
 	href,
+	className,
 }: Props) {
 	return (
-		<Card className="h-auto lg:h-[90vh] min-h-[90vh] ">
+		<Card className={`h-auto  min-h-[85vh] ${className} `}>
 			<CardHeader>
 				<CardTitle>{title}</CardTitle>
 				<CardDescription>{description}</CardDescription>

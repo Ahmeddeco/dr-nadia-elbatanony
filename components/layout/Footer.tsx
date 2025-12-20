@@ -3,6 +3,8 @@ import { socials } from "@/constants/nav"
 import Link from "next/link"
 import React from "react"
 import { Separator } from "../ui/separator"
+import { Copyright } from "lucide-react"
+import { Badge } from "../ui/badge"
 
 export default function Footer() {
 	return (
@@ -22,7 +24,9 @@ export default function Footer() {
 					))}
 				</nav>
 				<Separator />
-				<h6>©️ 2025 Ahmed Elgazzar. All rights reserved. </h6>
+				<Badge>
+					<Copyright /> 2025 Ahmed Elgazzar. All rights reserved.
+				</Badge>
 			</div>
 		</footer>
 	)
