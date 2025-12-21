@@ -29,12 +29,12 @@ type Props = {
 		  } & {
 				id: string
 				title: string
-				description: string
+				description: string | null
 				publicationDate: Date
 				journal: string
 				volume: string
-				issue: string
-				link: string
+				issue: string | null
+				link: string | null
 				createdAt: Date
 				updatedAt: Date
 		  })
@@ -81,7 +81,11 @@ export default function EditResearch({ professors, research }: Props) {
 			{/* ---------------------------------- description --------------------------------- */}
 			<Field>
 				<FieldLabel htmlFor={fields.description.name}>{fields.description.name}</FieldLabel>
-				<Textarea key={fields.description.key} name={fields.description.name} defaultValue={research?.description} />
+				<Textarea
+					key={fields.description.key}
+					name={fields.description.name}
+					defaultValue={research?.description ?? ""}
+				/>
 				<FieldError>{fields.description.errors}</FieldError>
 			</Field>
 
@@ -126,7 +130,7 @@ export default function EditResearch({ professors, research }: Props) {
 					type="text"
 					key={fields.issue.key}
 					name={fields.issue.name}
-					defaultValue={research?.issue}
+					defaultValue={research?.issue ?? ""}
 					placeholder="mb-001"
 				/>
 				<FieldError>{fields.issue.errors}</FieldError>
@@ -139,7 +143,7 @@ export default function EditResearch({ professors, research }: Props) {
 					type="url"
 					key={fields.link.key}
 					name={fields.link.name}
-					defaultValue={research?.link}
+					defaultValue={research?.link ?? ""}
 					placeholder="mb-001"
 				/>
 				<FieldError>{fields.link.errors}</FieldError>
