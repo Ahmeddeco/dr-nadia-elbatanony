@@ -25,7 +25,6 @@ type Props = {
 	inputName: string
 	label: string
 }
-// TODO add image to the selection and make it optional
 
 export default function MultiSelect({ allSelectedData, inputName, label, defaultValues }: Props) {
 	const [selected, setSelected] = useState<{ id: string; title: string }[]>(defaultValues || [])

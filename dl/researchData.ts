@@ -9,9 +9,7 @@ export const getAllResearchesForResearchesPage = async (size: number, page: numb
 
     const data = await prisma.research.findMany({
       orderBy: { title: "asc" },
-      select: {
-        id: true, title: true, publicationDate: true, journal: true, link: true, authors: { select: { id: true, name: true } }
-      },
+      include: { authors: { select: { id: true, name: true } } },
       take: size,
       skip: (page * size) - size,
     })

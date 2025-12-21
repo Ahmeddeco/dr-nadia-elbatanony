@@ -7,13 +7,11 @@ import { useActionState } from "react"
 import { Field, FieldError, FieldLabel } from "../ui/field"
 import { Input } from "../ui/input"
 import SubmitButton from "../shared/SubmitButton"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { DegreeProgram } from "@/generated/prisma/enums"
 import { Textarea } from "../ui/textarea"
 import MultiSelect from "../shared/MultiSelect"
-import { addResearchAction, editResearchAction } from "@/actions/researchAction"
 import ResearchSchema from "@/schemas/ResearchSchema"
 import DatePicker from "../shared/DatePicker"
+import { editResearchAction } from "@/actions/researchAction"
 
 type Props = {
 	professors:

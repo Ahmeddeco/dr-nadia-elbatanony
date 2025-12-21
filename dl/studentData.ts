@@ -42,4 +42,15 @@ export const getOneStudent = async (id: string) => {
   }
 }
 
-
+/* ----------------------- getStudentsImageForHomePage ---------------------- */
+export const getStudentsImageForHomePage = async () => {
+  try {
+    const totalStudents = await prisma.student.count()
+    const data = await prisma.student.findMany({
+      select: { image: true, name: true }, take: 5
+    })
+    return { data, totalStudents }
+  } catch (error) {
+    console.error(error)
+  }
+}

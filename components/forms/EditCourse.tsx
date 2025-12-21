@@ -11,10 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { DegreeProgram } from "@/generated/prisma/enums"
 import { editCourseAction } from "@/actions/courseAction"
 import { Textarea } from "../ui/textarea"
-import CourseSchema, { Course } from "@/schemas/CourseSchema"
-import { getOneCourseType } from "@/types/courseTypes"
+import CourseSchema from "@/schemas/CourseSchema"
 import MultiSelect from "../shared/MultiSelect"
-import { Material } from "@/schemas/materialSchema"
 
 type Props = {
 	defaultValues:

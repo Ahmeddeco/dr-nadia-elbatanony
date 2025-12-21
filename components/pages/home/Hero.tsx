@@ -1,17 +1,21 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { getStudentsImageForHomePage } from "@/dl/studentData"
 import { faker } from "@faker-js/faker"
 import { CloudDownload, SearchCheck } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { PiVirusThin } from "react-icons/pi"
 
-export default function Hero() {
+export default async function Hero() {
+	const students = await getStudentsImageForHomePage()
+	const studentImages = students?.data
+	const totalStudent = students?.totalStudents
 	return (
 		<section className="flex lg:flex-row flex-col items-center justify-between  lg:h-[80vh] h-auto">
 			{/* --------------------------------- title -------------------------------- */}
 			<div className="flex flex-1 flex-col lg:items-start items-center gap-4">
-				<h1>
+				<h1 className="text-primary">
 					dr Nadia Elbatanony <br />
 					professor of microbiology
 				</h1>
@@ -39,23 +43,22 @@ export default function Hero() {
 
 				{/* -------------------------- trusted students -------------------------- */}
 				<div className="flex flex-col gap-2 w-full">
-					{/* TODO add a real data from database student's table  */}
 					<div className="flex items-center gap-4">
 						<h4 className="uppercase">trusted by</h4>
-						<h6>Over 2k Students</h6>
+						<h6>Over {totalStudent} Students</h6>
 					</div>
 					<div className="-space-x-2 flex ">
-						{Array.from({ length: 5 }).map((_, i) => (
-							<Avatar key={i} className="border border-primary">
+						{studentImages?.map(({ image, name }) => (
+							<Avatar key={image} className="border border-primary">
 								<AvatarImage src={faker.image.personPortrait()} />
-								<AvatarFallback>{faker.string.alpha(2)} </AvatarFallback>
+								<AvatarFallback>{name[0]} </AvatarFallback>
 							</Avatar>
 						))}
 					</div>
 				</div>
 			</div>
 
-			{/* --------------------------------- Image -------------------------------- */}
+			{/* --------------------------------- Main Image -------------------------------- */}
 			<div className="relative aspect-square flex-1 w-full ">
 				<Image src={"/hero.avif"} alt={"Nadia M. Elbatanony"} fill className="object-contain z-20" />
 				<PiVirusThin className="text-chart-3/30 size-72 lg:block hidden absolute top-64 right-4  z-10" />

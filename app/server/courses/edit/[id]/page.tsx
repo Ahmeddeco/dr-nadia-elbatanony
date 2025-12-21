@@ -4,7 +4,6 @@ import { getOneCourse } from "@/dl/courseData"
 import { getAllMaterialForCoursesPage } from "@/dl/materialData"
 import { getAllProfessorsForMultiSelect } from "@/dl/professorData"
 import { isAdmin } from "@/functions/isAdmin"
-import { getOneCourseType } from "@/types/courseTypes"
 import { CircleChevronLeft } from "lucide-react"
 
 export default async function EditCoursePage({ params }: { params: Promise<{ id: string }> }) {

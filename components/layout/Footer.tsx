@@ -9,7 +9,7 @@ import { Badge } from "../ui/badge"
 export default function Footer() {
 	return (
 		<footer className="px-4  min-h-48 h-auto bg-foreground text-background border-t-4 mt-12 border-primary  ">
-			<div className="container mx-auto flex flex-col items-center justify-center  gap-8 py-24">
+			<div className="container mx-auto flex flex-col items-center justify-center  gap-8 py-24 ">
 				{/* -------------------------------- Logo -------------------------------- */}
 				<Logo />
 				<h6 className=" text-center text-balance w-sm lg:w-lg">

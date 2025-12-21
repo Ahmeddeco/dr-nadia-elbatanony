@@ -2,7 +2,6 @@
 
 import prisma from "@/lib/prisma"
 import ProfessorSchema from "@/schemas/ProfessorSchema"
-import StudentSchema from "@/schemas/StudentSchema"
 import { parseWithZod } from "@conform-to/zod"
 import { redirect } from "next/navigation"
 

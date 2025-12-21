@@ -64,7 +64,7 @@ async function main() {
     console.warn('⚠️ No courses created. Skipping material creation to avoid P2003 error.')
     return
   }
-  const materialData = Array.from({ length: 8 }).map((_, index) => ({
+  const materialData = Array.from({ length: 8 }).map(() => ({
     title: faker.book.title(),
     author: faker.person.fullName(),
     description: faker.book.author(),
