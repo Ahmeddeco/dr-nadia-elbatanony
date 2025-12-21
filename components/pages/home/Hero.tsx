@@ -15,7 +15,7 @@ export default async function Hero() {
 		<section className="flex lg:flex-row flex-col items-center justify-between  lg:h-[80vh] h-auto">
 			{/* --------------------------------- title -------------------------------- */}
 			<div className="flex flex-1 flex-col lg:items-start items-center gap-4">
-				<h1 className="text-primary">
+				<h1>
 					dr Nadia Elbatanony <br />
 					professor of microbiology
 				</h1>

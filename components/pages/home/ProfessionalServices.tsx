@@ -6,7 +6,7 @@ export default function ProfessionalServices() {
 	return (
 		<section className="flex flex-col items-center justify-center gap-8">
 			<div className="flex flex-col items-center justify-center gap-2">
-				<h2 className="text-primary">Professional Service & Expertise</h2>
+				<h2>Professional Service & Expertise</h2>
 				<h6 className="max-w-lg text-center w-full">
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus aperiam voluptas delectus ratione
 					voluptatem maiores earum quo possimus.

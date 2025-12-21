@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getAllCoursesForCoursesPage } from "@/dl/courseData"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Eye, Home } from "lucide-react"
@@ -39,77 +38,63 @@ export default async function ResearchesPage({
 				</h6>
 			</div>
 			<div className=" h-full flex flex-wrap items-center justify-center w-fit gap-8">
-				{researches?.data.map(
-					({
-						authors,
-						createdAt,
-						description,
-						id,
-						issue,
-						journal,
-						link,
-						publicationDate,
-						title,
-						updatedAt,
-						volume,
-					}) => (
-						<Dialog key={id}>
-							{/* ------------------------ DialogTrigger ----------------------- */}
-							<DialogTrigger asChild>
-								<Card className="lg:w-sm w-full cursor-pointer">
-									<CardHeader>
-										<CardTitle className="text-primary text-center ">{title}</CardTitle>
-									</CardHeader>
-									<CardContent>
-										<div className="flex flex-col gap-2 capitalize">
-											<h6 className="text-center">
-												<span className="text-primary font-semibold">journal :</span> {journal}
-											</h6>
-											<h6 className="text-center">
-												<span className="text-primary font-semibold">publication Date :</span>{" "}
-												{publicationDate.toLocaleDateString("en-GB", {
-													year: "numeric",
-													month: "long",
-													day: "numeric",
-												})}
-											</h6>
-										</div>
-									</CardContent>
-								</Card>
-							</DialogTrigger>
-
-							{/* ------------------------ DialogContent ----------------------- */}
-							<DialogContent>
-								<DialogHeader>
-									<DialogTitle>{title}</DialogTitle>
-								</DialogHeader>
-								<div className="flex flex-col gap-2 capitalize">
-									<h6>author:</h6>
-									<div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-										{authors.map(({ id, name }) => (
-											<Badge key={id} variant={"secondary"}>
-												{name}
-											</Badge>
-										))}
+				{researches?.data.map(({ authors, description, id, journal, link, publicationDate, title }) => (
+					<Dialog key={id}>
+						{/* ------------------------ DialogTrigger ----------------------- */}
+						<DialogTrigger asChild>
+							<Card className="lg:w-sm w-full cursor-pointer">
+								<CardHeader>
+									<CardTitle className="text-primary text-center ">{title}</CardTitle>
+								</CardHeader>
+								<CardContent>
+									<div className="flex flex-col gap-2 capitalize">
+										<h6 className="text-center">
+											<span className="text-primary font-semibold">journal :</span> {journal}
+										</h6>
+										<h6 className="text-center">
+											<span className="text-primary font-semibold">publication Date :</span>{" "}
+											{publicationDate.toLocaleDateString("en-GB", {
+												year: "numeric",
+												month: "long",
+												day: "numeric",
+											})}
+										</h6>
 									</div>
-									<h6 className="text-center">
-										<span className="text-primary font-semibold">journal :</span> {journal}
-									</h6>
-									<Separator />
-									<h6 className="text-primary font-semibold">description:</h6>
-									<p className="lowercase">{description}</p>
+								</CardContent>
+							</Card>
+						</DialogTrigger>
+
+						{/* ------------------------ DialogContent ----------------------- */}
+						<DialogContent>
+							<DialogHeader>
+								<DialogTitle>{title}</DialogTitle>
+							</DialogHeader>
+							<div className="flex flex-col gap-2 capitalize">
+								<h6>author:</h6>
+								<div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+									{authors.map(({ id, name }) => (
+										<Badge key={id} variant={"secondary"}>
+											{name}
+										</Badge>
+									))}
 								</div>
-								<DialogFooter>
-									<Button asChild>
-										<Link href={link} target="_blank">
-											<Eye /> see the research
-										</Link>
-									</Button>
-								</DialogFooter>
-							</DialogContent>
-						</Dialog>
-					)
-				)}
+								<h6 className="text-center">
+									<span className="text-primary font-semibold">journal :</span> {journal}
+								</h6>
+								<Separator />
+								<h6 className="text-primary font-semibold">description:</h6>
+								<p className="lowercase">{description}</p>
+							</div>
+							<DialogFooter>
+								<Button asChild>
+									<Link href={link} target="_blank">
+										<Eye /> see the research
+									</Link>
+								</Button>
+							</DialogFooter>
+						</DialogContent>
+					</Dialog>
+				))}
 
 				<Pagination>
 					<PaginationContent>

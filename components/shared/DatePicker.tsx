@@ -15,7 +15,10 @@ type Props = {
 }
 
 export default function DatePicker({ defaultValue, key, name }: Props) {
-	const [date, setDate] = useState<Date | undefined>(new Date(defaultValue ?? ""))
+	const [date, setDate] = useState<Date | undefined>(() => {
+		const d = defaultValue ? new Date(defaultValue) : undefined
+		return d && !isNaN(d.getTime()) ? d : undefined
+	})
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [open, setOpen] = useState(false)
 
