@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Eye, Home } from "lucide-react"
@@ -32,7 +32,7 @@ export default async function ResearchesPage({
 	) : (
 		<div className="py-12 flex flex-col items-center justify-center gap-8">
 			<div className="flex flex-col items-center justify-center gap-2">
-				<h1>our courses</h1>
+				<h1>our researches</h1>
 				<h6 className="max-w-lg text-center">
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia quaerat asperiores dignissimos?
 				</h6>
@@ -41,28 +41,27 @@ export default async function ResearchesPage({
 				{researches?.data.map(({ authors, description, id, journal, link, publicationDate, title }) => (
 					<Dialog key={id}>
 						{/* ------------------------ DialogTrigger ----------------------- */}
-						<DialogTrigger asChild>
-							<Card className="lg:w-sm w-full cursor-pointer">
-								<CardHeader>
-									<CardTitle className="text-primary text-center ">{title}</CardTitle>
-								</CardHeader>
-								<CardContent>
-									<div className="flex flex-col gap-2 capitalize">
-										<h6 className="text-center">
-											<span className="text-primary font-semibold">journal :</span> {journal}
-										</h6>
-										<h6 className="text-center">
-											<span className="text-primary font-semibold">publication Date :</span>{" "}
-											{publicationDate.toLocaleDateString("en-GB", {
-												year: "numeric",
-												month: "long",
-												day: "numeric",
-											})}
-										</h6>
-									</div>
-								</CardContent>
-							</Card>
-						</DialogTrigger>
+						<Card className="lg:w-sm aspect-video w-full ">
+							<CardHeader>
+								<CardTitle className="line-clamp-2">{title}</CardTitle>
+								<CardDescription>{publicationDate.toLocaleDateString("en-GB", { year: "numeric" })}</CardDescription>
+							</CardHeader>
+							<CardContent>
+								<div className="flex flex-col gap-2 capitalize">
+									<h6>journal :</h6>
+									<Badge key={id} variant={"secondary"}>
+										{journal}
+									</Badge>
+								</div>
+							</CardContent>
+							<CardFooter className="justify-center ">
+								<Button asChild>
+									<DialogTrigger>
+										<Eye /> see more
+									</DialogTrigger>
+								</Button>
+							</CardFooter>
+						</Card>
 
 						{/* ------------------------ DialogContent ----------------------- */}
 						<DialogContent>
@@ -78,18 +77,21 @@ export default async function ResearchesPage({
 										</Badge>
 									))}
 								</div>
-								<h6 className="text-center">
-									<span className="text-primary font-semibold">journal :</span> {journal}
-								</h6>
+								<h6>journal :</h6>
+								<Badge key={id} variant={"secondary"}>
+									{journal}
+								</Badge>
 								<Separator />
-								<h6 className="text-primary font-semibold">description:</h6>
+								<h6 className=" font-semibold">description:</h6>
 								<p className="lowercase">{description}</p>
 							</div>
 							<DialogFooter>
 								<Button asChild>
-									<Link href={link} target="_blank">
-										<Eye /> see the research
-									</Link>
+									{link ? (
+										<Link href={link} target="_blank">
+											<Eye /> see the research
+										</Link>
+									) : null}
 								</Button>
 							</DialogFooter>
 						</DialogContent>

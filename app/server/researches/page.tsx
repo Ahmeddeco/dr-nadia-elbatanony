@@ -80,9 +80,11 @@ export default async function ResearchPage({
 								</TableCell>
 								<TableCell className="capitalize">
 									<Button variant={"link"} size={"icon"} asChild>
-										<Link href={link}>
-											<SquareArrowOutUpLeft />
-										</Link>
+										{link ? (
+											<Link href={link} target="_blank">
+												<SquareArrowOutUpLeft />
+											</Link>
+										) : null}
 									</Button>
 								</TableCell>
 

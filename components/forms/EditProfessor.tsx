@@ -64,7 +64,7 @@ export default function EditProfessor({ professor }: Props) {
 					type="number"
 					key={fields.mobile.key}
 					name={fields.mobile.name}
-					defaultValue={professor.mobile}
+					defaultValue={professor.mobile ?? ""}
 					placeholder="0123456789"
 				/>
 				<FieldError>{fields.mobile.errors}</FieldError>
@@ -114,7 +114,7 @@ export default function EditProfessor({ professor }: Props) {
 				imageName={fields.image.name}
 				label={fields.image.name}
 				errors={fields.image.errors}
-				dbImage={professor.image}
+				dbImage={professor.image ?? ""}
 			/>
 
 			<SubmitButton text={"edit professor"} />

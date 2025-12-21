@@ -7,21 +7,21 @@ async function main() {
   console.log('--- Starting Seeding Process ---')
 
   /* ----------------------------- professorData ---------------------------- */
-  const professorData = await prisma.professor.createMany({
-    data: Array.from({ length: 12 }).map(() => ({
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-      mobile: faker.phone.number({ style: "international" }),
-      country: faker.location.country(),
-      state: faker.location.state(),
-      city: faker.location.city(),
-      gender: faker.helpers.enumValue(Gender),
-      age: faker.number.int({ min: 30, max: 100 }),
-      image: faker.image.personPortrait(),
-    })),
-    skipDuplicates: true
-  })
-  console.log(`✅ ${professorData.count} Professors created.`)
+  // const professorData = await prisma.professor.createMany({
+  //   data: Array.from({ length: 12 }).map(() => ({
+  //     name: faker.person.fullName(),
+  //     email: faker.internet.email(),
+  //     mobile: faker.phone.number({ style: "international" }),
+  //     country: faker.location.country(),
+  //     state: faker.location.state(),
+  //     city: faker.location.city(),
+  //     gender: faker.helpers.enumValue(Gender),
+  //     age: faker.number.int({ min: 30, max: 100 }),
+  //     image: faker.image.personPortrait(),
+  //   })),
+  //   skipDuplicates: true
+  // })
+  // console.log(`✅ ${professorData.count} Professors created.`)
 
   /* ------------------------------- studentData ------------------------------ */
   const studentData = await prisma.student.createMany({

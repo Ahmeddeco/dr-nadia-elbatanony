@@ -13,12 +13,9 @@ export const addProfessorAction = async (prevState: unknown, formData: FormData)
     return submission.reply()
   }
 
-  console.log("submission from addProfessorAction", submission)
-
-
   try {
     await prisma.professor.upsert({
-      where: { email: submission.value.email },
+      where: { email: submission.value.email! },
       create: {
         name: submission.value.name,
         email: submission.value.email,
@@ -44,7 +41,7 @@ export const addProfessorAction = async (prevState: unknown, formData: FormData)
   } catch (error) {
     console.error(error)
   }
-  // redirect("/server/professors")
+  redirect("/server/professors")
 }
 
 /* ---------------------------- editStudentAction --------------------------- */

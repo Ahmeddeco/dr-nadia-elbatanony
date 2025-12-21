@@ -55,7 +55,7 @@ export default function EditResearch({ professors, research }: Props) {
 
 	return (
 		<Form id={form.id} action={action} onSubmit={form.onSubmit} className="space-y-6">
-			<Input type="hidden" value={research?.id} name="id" />
+			<Input type="hidden" value={research?.id ?? ""} name="id" />
 
 			{/* ---------------------------------- title --------------------------------- */}
 			<Field>
@@ -90,6 +90,7 @@ export default function EditResearch({ professors, research }: Props) {
 				key={fields.publicationDate.key}
 				name={fields.publicationDate.name}
 				defaultValue={research?.publicationDate.toISOString()}
+				errors={fields.publicationDate.errors}
 			/>
 
 			{/* ---------------------------------- journal ---------------------------------- */}

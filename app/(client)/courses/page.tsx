@@ -80,7 +80,6 @@ export default async function CoursesPage({ searchParams }: { searchParams: Prom
 								<h6>description:</h6>
 								<p className="lowercase">{description}</p>
 							</div>
-							{/* TODO add dialogFooter for a button that give a student an ability to send a request to the professor to enroll the course  */}
 						</DialogContent>
 					</Dialog>
 				))}

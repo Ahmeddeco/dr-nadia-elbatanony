@@ -7,9 +7,6 @@ import { redirect } from "next/navigation"
 
 export const addCourseAction = async (prevState: unknown, formData: FormData) => {
 
-  console.log("formData from addCourseAction", formData)
-
-
   const submission = parseWithZod(formData, {
     schema: CourseSchema,
   })

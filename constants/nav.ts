@@ -7,12 +7,12 @@ export const frontNavLinks = [
     href: "/"
   },
   {
-    title: "courses",
-    href: "/courses"
-  },
-  {
     title: "researches",
     href: "/researches"
+  },
+  {
+    title: "courses",
+    href: "/courses"
   },
   {
     title: "server",

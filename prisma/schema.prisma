@@ -185,9 +185,9 @@ enum GradeValue {
 model Professor {
   id         String     @id @default(uuid())
   name       String
-  image      String
+  image      String?
   email      String     @unique
-  mobile     String     @unique
+  mobile     String?    @unique
   gender     Gender
   age        Int?
   country    String?
@@ -204,13 +204,13 @@ model Professor {
 model Research {
   id              String      @id @default(uuid())
   title           String      @unique
-  description     String
+  description     String?
   authors         Professor[]
   publicationDate DateTime
   journal         String
   volume          String
-  issue           String
-  link            String
+  issue           String?
+  link            String?
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 }

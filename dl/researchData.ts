@@ -8,7 +8,7 @@ export const getAllResearchesForResearchesPage = async (size: number, page: numb
     const totalPages = Math.ceil(totalCourses / size)
 
     const data = await prisma.research.findMany({
-      orderBy: { title: "asc" },
+      orderBy: { publicationDate: "desc" },
       include: { authors: { select: { id: true, name: true } } },
       take: size,
       skip: (page * size) - size,
@@ -31,3 +31,4 @@ export const getOneResearch = async (id: string) => {
     console.error(error)
   }
 }
+

@@ -12,6 +12,11 @@ export const serverNav = [
     icon: GraduationCap
   },
   {
+    title: "researches",
+    href: "/server/researches",
+    icon: SearchCheck
+  },
+  {
     title: "students",
     href: "/server/students",
     icon: Users
@@ -26,9 +31,5 @@ export const serverNav = [
     href: "/server/materials",
     icon: LibraryBig
   },
-  {
-    title: "researches",
-    href: "/server/researches",
-    icon: SearchCheck
-  },
+
 ]

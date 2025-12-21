@@ -71,6 +71,7 @@ export default function AddResearch({ professors }: Props) {
 				key={fields.publicationDate.key}
 				name={fields.publicationDate.name}
 				defaultValue={fields.publicationDate.initialValue}
+				errors={fields.publicationDate.errors}
 			/>
 
 			{/* ---------------------------------- journal ---------------------------------- */}
@@ -81,7 +82,7 @@ export default function AddResearch({ professors }: Props) {
 					key={fields.journal.key}
 					name={fields.journal.name}
 					defaultValue={fields.journal.initialValue}
-					placeholder="mb-001"
+					placeholder="Middle East Journal "
 				/>
 				<FieldError>{fields.journal.errors}</FieldError>
 			</Field>
@@ -94,7 +95,7 @@ export default function AddResearch({ professors }: Props) {
 					key={fields.volume.key}
 					name={fields.volume.name}
 					defaultValue={fields.volume.initialValue}
-					placeholder="mb-001"
+					placeholder="14"
 				/>
 				<FieldError>{fields.volume.errors}</FieldError>
 			</Field>
@@ -107,7 +108,7 @@ export default function AddResearch({ professors }: Props) {
 					key={fields.issue.key}
 					name={fields.issue.name}
 					defaultValue={fields.issue.initialValue}
-					placeholder="mb-001"
+					placeholder="3"
 				/>
 				<FieldError>{fields.issue.errors}</FieldError>
 			</Field>
@@ -120,7 +121,7 @@ export default function AddResearch({ professors }: Props) {
 					key={fields.link.key}
 					name={fields.link.name}
 					defaultValue={fields.link.initialValue}
-					placeholder="mb-001"
+					placeholder="https://hrcak.srce.hr/file/265925"
 				/>
 				<FieldError>{fields.link.errors}</FieldError>
 			</Field>

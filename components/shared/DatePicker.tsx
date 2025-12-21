@@ -5,16 +5,17 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Input } from "../ui/input"
-import { Field, FieldLabel } from "../ui/field"
+import { Field, FieldError, FieldLabel } from "../ui/field"
 import { useState } from "react"
 
 type Props = {
 	name: string | undefined
 	key: string | undefined
 	defaultValue: string | undefined
+	errors: string[] | undefined
 }
 
-export default function DatePicker({ defaultValue, key, name }: Props) {
+export default function DatePicker({ defaultValue, key, name, errors }: Props) {
 	const [date, setDate] = useState<Date | undefined>(() => {
 		const d = defaultValue ? new Date(defaultValue) : undefined
 		return d && !isNaN(d.getTime()) ? d : undefined
@@ -53,6 +54,7 @@ export default function DatePicker({ defaultValue, key, name }: Props) {
 					/>
 				</PopoverContent>
 			</Popover>
+			<FieldError>{errors}</FieldError>
 		</Field>
 	)
 }

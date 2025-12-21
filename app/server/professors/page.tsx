@@ -1,5 +1,5 @@
 import { isAdmin } from "@/functions/isAdmin"
-import { MoreVertical, PlusCircle, UserSquare2 } from "lucide-react"
+import { ImageOff, MoreVertical, PlusCircle, UserSquare2 } from "lucide-react"
 import ServerPageCard from "@/components/shared/ServerPageCard"
 import EmptyCard from "@/components/shared/EmptyCard"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -71,16 +71,20 @@ export default async function ProfessorPage({
 						{professors?.data.map(({ age, city, country, email, gender, id, image, mobile, name, state }) => (
 							<TableRow key={id}>
 								<TableCell>
-									<Image
-										src={image ?? "/noImage.svg"}
-										alt={name ?? "noImage"}
-										width={50}
-										height={50}
-										className="rounded-lg object-cover aspect-square"
-									/>
+									{image ? (
+										<Image
+											src={image ?? "/noImage.svg"}
+											alt={name ?? "noImage"}
+											width={50}
+											height={50}
+											className="rounded-lg object-cover aspect-square"
+										/>
+									) : (
+										<ImageOff />
+									)}
 								</TableCell>
 								<TableCell className="capitalize">{name}</TableCell>
-								<TableCell className="capitalize">{age} years</TableCell>
+								<TableCell className="capitalize">{age ? `${age} years old` : null}</TableCell>
 								<TableCell className="capitalize">{email}</TableCell>
 								<TableCell>{mobile}</TableCell>
 								<TableCell className="capitalize">{gender}</TableCell>
