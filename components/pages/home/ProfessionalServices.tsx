@@ -16,7 +16,7 @@ export default function ProfessionalServices() {
 				{services.map(({ description, icon, title }) => (
 					<Card
 						key={title}
-						className="w-sm aspect-video even:bg-primary even:text-primary-foreground hover:scale-105 ease-in-out duration-700 hover:rotate-1 "
+						className="w-xs lg:w-md aspect-video even:bg-primary even:text-primary-foreground hover:scale-105 ease-in-out duration-700 hover:rotate-1 "
 					>
 						<CardContent className="flex flex-col items-center justify-center gap-4">
 							{React.createElement(icon, { size: "96" })}
