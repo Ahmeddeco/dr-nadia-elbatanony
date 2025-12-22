@@ -5,7 +5,7 @@ export default function Expertise() {
 	return (
 		<section className="flex flex-col items-center justify-center gap-4">
 			<h2>Research Areas & Expertise</h2>
-			<h6 className="max-w-lg text-center">
+			<h6 className="max-w-lg w-full text-center">
 				Dr. Elbatanony’s work focuses heavily on the intersection of microbiology and environmental sustainability. Her
 				core areas of expertise include:
 			</h6>

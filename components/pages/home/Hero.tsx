@@ -19,7 +19,7 @@ export default async function Hero() {
 					dr Nadia Elbatanony <br />
 					professor of microbiology
 				</h1>
-				<h6 className="max-w-lg">
+				<h6 className="max-w-lg w-full">
 					Nadia M. Elbatanony is a Professor of Microbiology at the Environmental Studies and Research Institute (ESRI),
 					University of Sadat City, Egypt. With a career spanning several decades, she has established herself as a
 					leading expert in the field of Environmental and Agricultural Microbiology, specifically focusing on
@@ -28,13 +28,13 @@ export default async function Hero() {
 
 				{/* ------------------------------- Buttons ------------------------------ */}
 				{/* TODO add links to buttons */}
-				<div className="flex items-center gap-4">
-					<Button asChild>
+				<div className="flex lg:flex-row flex-col items-center gap-4">
+					<Button asChild size={"full"}>
 						<Link href={"#"}>
 							<CloudDownload /> download CV
 						</Link>
 					</Button>
-					<Button asChild variant={"outline"}>
+					<Button asChild size={"full"} variant={"outline"}>
 						<Link href={"#"}>
 							<SearchCheck /> view researchers
 						</Link>
