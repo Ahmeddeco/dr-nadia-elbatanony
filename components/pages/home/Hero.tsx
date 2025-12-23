@@ -26,20 +26,13 @@ export default async function Hero() {
 					sustainable development through microbial solutions.
 				</h6>
 
-				{/* ------------------------------- Buttons ------------------------------ */}
+				{/* ------------------------------- Button ------------------------------- */}
 				{/* TODO add links to buttons */}
-				<div className="flex lg:flex-row flex-col items-center gap-4">
-					<Button asChild size={"full"}>
-						<Link href={"#"}>
-							<CloudDownload /> download CV
-						</Link>
-					</Button>
-					<Button asChild size={"full"} variant={"outline"}>
-						<Link href={"#"}>
-							<SearchCheck /> view researchers
-						</Link>
-					</Button>
-				</div>
+				<Button asChild size={"lg"}>
+					<Link href={"/researches"}>
+						<SearchCheck /> see researches
+					</Link>
+				</Button>
 
 				{/* -------------------------- trusted students -------------------------- */}
 				<div className="flex flex-col gap-2 w-full">

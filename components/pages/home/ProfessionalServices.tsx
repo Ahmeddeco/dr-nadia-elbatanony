@@ -7,9 +7,9 @@ export default function ProfessionalServices() {
 		<section className="flex flex-col items-center justify-center gap-8">
 			<div className="flex flex-col items-center justify-center gap-2">
 				<h2>Professional Service & Expertise</h2>
-				<h6 className="max-w-lg text-center w-full">
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus aperiam voluptas delectus ratione
-					voluptatem maiores earum quo possimus.
+				<h6 className="max-w-xl text-center w-full">
+					Expertise in microbiology with applied environmental studies, focusing on sustainable development projects and
+					innovative biological solutions to agricultural and ecological challenges.
 				</h6>
 			</div>
 			<div className="flex flex-wrap items-center justify-center gap-8">
